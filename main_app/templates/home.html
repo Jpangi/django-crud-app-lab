@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/home.css' %}"
+/>
+{% endblock %} {% block content %}
+
+
+<section class="logo-container">
+<h1>Welcome To your Pokedex</h1>
+  <div class="pokemon-container">
+  
+          <img
+            src="{% static 'images/bouncing-pokeball.gif' %}"
+            ,alt="The pokemon Collector Logo"
+          />
+   
+</section>
+
+{% endblock %}

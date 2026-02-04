@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/pokemon/pokemon-index.css' %}" />
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>Pokemon List</h1>
+  <div class="icon electric">
+    <img src="{% static 'images/electrictype.svg' %}" alt="Electric" />
+  </div>
+
+  <div class="icon fire">
+    <img src="{% static 'images/firetype.svg' %}" alt="A happy cat" />
+  </div>
+
+  <div class="icon water">
+    <img src="{% static 'images/watertype.svg' %}" alt="A cat in a teacup" />
+  </div>
+  <div class="icon grass">
+    <img src="{% static 'images/grasstype.svg' %}" alt="A cat in a box" />
+  </div>
+</section>
+
+<section class="card-container">
+  {% for pokemon in pokemons %}
+  <div class="card">
+    <div class="card-content">
+      <div class="card-img-container">
+        <img src="{% static 'images/pokeball.svg' %}" alt="A Pokeball" />
+      </div>
+      <h2 class="card-title">{{ pokemon.name }}</h2>
+
+      <p>{{ pokemon.type }} type</p>
+
+      <p><small>{{ pokemon.description }}</small></p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
