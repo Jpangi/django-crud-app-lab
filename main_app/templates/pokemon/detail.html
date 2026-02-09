@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/pokemon/pokemon-detail.css' %}" />
+{% endblock %} {% block content %}
+<section class="pokemon-container">
+  <div class="pokemon-img">
+    <img src="{% static 'images/pokeball.svg' %}" alt="A skater boy cat" />
+  </div>
+  <div class="pokemon-details">
+    <h1>{{ pokemon.name }}</h1>
+    <p>{{pokemon.type}}</p>
+    <p>{{ pokemon.description }}</p>
+  </div>
+  <div class="pokemon-actions">
+    <a href="{% url 'pokemon-update' pokemon.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'pokemon-delete' pokemon.id %}" class="btn danger"
+      >Delete</a
+    >
+  </div>
+</section>
+{% endblock %}
+<section class="items">
+  <div class="subsection-title">
+    <h2>items</h2>
+    <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+    <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+    <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+  </div>
+
+
+    <h3>{{ pokemon.name }}'s Toys</h3>
+  <div class="subsection-content">
+    {% if pokemon.items.count %} 
+      {% for item in pokemon.items.all %}
+        <div class="item-container">
+          <div class="color-block" style="background-color: {{ item.color }}"></div>
+          <a href="{% url 'item-detail' item.id %}">
+            <p>A {{ item.color }} {{ toy.name }}</p>
+          </a>
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="no-items">{{pokemon.name}} doesn't have any items!</p>
+    {% endif %}
+  </div>
+
+
+  <h3>Available items</h3>
+  <div class="subsection-content">
+    {% for item in items %}
+    <div class="item-container">
+      <div class="color-block" style="background-color: {{ item.color }}"></div>
+      <p>{{ item.color }} {{ item.name }}</p>
+      <form
+        action="{% url 'associate-item' pokemon.id item.id %}"
+        method="post"
+      >
+        {% csrf_token %}
+        <button type="submit" class="btn submit">Give Item</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</section>

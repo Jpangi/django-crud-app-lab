@@ -28,8 +28,11 @@
       </div>
       <nav>
         <ul>
-          <li><a href="/pokemon">All Pokemon</a></li>
-          <li><a href="/about">About</a></li>
+          <li><a href="{% url 'pokemon-index' %}">All Pokemon</a></li>
+          <li><a href="{% url 'item-index' %}">All Items</a></li>
+          <li><a href="{% url 'pokemon-create' %}">Add a Pokemon</a></li>
+          <li><a href="{% url 'item-create' %}">Add an Item</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
         </ul>
       </nav>
     </header>
