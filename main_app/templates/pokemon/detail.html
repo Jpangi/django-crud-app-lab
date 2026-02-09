@@ -3,7 +3,7 @@
 {% endblock %} {% block content %}
 <section class="pokemon-container">
   <div class="pokemon-img">
-    <img src="{% static 'images/pokeball.svg' %}" alt="A skater boy cat" />
+    <img src="{% static 'images/pokeball.svg' %}" alt="A skater boy pokemon" />
   </div>
   <div class="pokemon-details">
     <h1>{{ pokemon.name }}</h1>
@@ -26,38 +26,44 @@
     <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
   </div>
 
-
-    <h3>{{ pokemon.name }}'s Toys</h3>
+  <!-- displaying a cat's toys -->
+  <h3>{{ pokemon.name }}'s Items</h3>
   <div class="subsection-content">
     {% if pokemon.items.count %} 
       {% for item in pokemon.items.all %}
         <div class="item-container">
           <div class="color-block" style="background-color: {{ item.color }}"></div>
           <a href="{% url 'item-detail' item.id %}">
-            <p>A {{ item.color }} {{ toy.name }}</p>
+            <p>A {{ item.color }} {{ item.name }}</p>
           </a>
         </div>
       {% endfor %} 
     {% else %}
-      <p class="no-items">{{pokemon.name}} doesn't have any items!</p>
+      <p class="no-items">{{pokemon.name}} doesn't have any Items!</p>
     {% endif %}
   </div>
 
 
-  <h3>Available items</h3>
-  <div class="subsection-content">
-    {% for item in items %}
-    <div class="item-container">
-      <div class="color-block" style="background-color: {{ item.color }}"></div>
-      <p>{{ item.color }} {{ item.name }}</p>
-      <form
-        action="{% url 'associate-item' pokemon.id item.id %}"
-        method="post"
-      >
-        {% csrf_token %}
-        <button type="submit" class="btn submit">Give Item</button>
-      </form>
-    </div>
-    {% endfor %}
-  </div>
-</section>
+
+
+ <h3>Available Items</h3>
+<div class="subsection-content">
+  {% if items.count %} 
+    {% for item in items.all %}
+      <div class="item-container">
+        <div class="color-block" style="background-color: {{ item.color }}"></div>
+        <a href="{% url 'item-detail' item.id %}">
+          <p>A {{ item.color }} {{ item.name }}</p>
+        </a>
+        <form action="{% url 'associate-item' pokemon.id item.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn submit">Give item</button>
+        </form>
+      </div>
+    {% endfor %} 
+  {% else %}
+    <p class="all-items">{{pokemon.name}} already has all the available items 🥳</p>
+  {% endif %}
+</div>
+
+

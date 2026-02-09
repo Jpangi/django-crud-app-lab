@@ -5,6 +5,7 @@ from .models import Pokemon, Item
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.shortcuts import redirect
 
 # Define the home view function 
 #reqeust is similar to the req object in express
@@ -27,7 +28,7 @@ def pokemon_detail(request, pokemon_id):
     })
 def associate_item(request, pokemon_id, item_id):
     # Note that you can pass a toy's id instead of the whole object
-    Pokemon.objects.get(id=pokemon_id).toys.add(item_id)
+    Pokemon.objects.get(id=pokemon_id).items.add(item_id)
     return redirect('pokemon-detail', pokemon_id=pokemon_id)
 
 
