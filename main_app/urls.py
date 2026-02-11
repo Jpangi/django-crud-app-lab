@@ -2,7 +2,7 @@ from django.urls import path
 from . import views # Import views to connect routes to view functions
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.Home.as_view(), name='home'),
     path('about/', views.about, name='about'),
     path('pokemon/', views.pokemon_index, name='pokemon-index'),
     path('pokemon/<int:pokemon_id>/', views.pokemon_detail, name='pokemon-detail'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('item/', views.ItemList.as_view(), name='item-index'),
 
     path('pokemon/<int:pokemon_id>/associate-item/<int:item_id>/', views.associate_item, name='associate-item'),
+    path('accounts/signup/', views.signup, name='signup'),
 
 
 ]
