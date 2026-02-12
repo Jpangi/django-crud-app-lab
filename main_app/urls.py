@@ -12,6 +12,7 @@ urlpatterns = [
     path('items/create/', views.ItemCreate.as_view(), name='item-create'),
     path('item/<int:pk>/', views.ItemDetail.as_view(), name='item-detail'),
     path('item/', views.ItemList.as_view(), name='item-index'),
+    path('pokemon/<int:pokemon_id>/remove-item/<int:item_id>/', views.remove_item, name='remove-item'),
 
     path('pokemon/<int:pokemon_id>/associate-item/<int:item_id>/', views.associate_item, name='associate-item'),
     path('accounts/signup/', views.signup, name='signup'),

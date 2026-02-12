@@ -32,13 +32,16 @@ def pokemon_detail(request, pokemon_id):
     items_pokemon_doesnt_have = Item.objects.exclude(id__in = pokemon.items.all().values_list('id'))
     return render(request, 'pokemon/detail.html',{
         'pokemon': pokemon,
-        'Items': items_pokemon_doesnt_have
+        'items': items_pokemon_doesnt_have
     })
 
 @login_required
 def associate_item(request, pokemon_id, item_id):
     # Note that you can pass a toy's id instead of the whole object
     Pokemon.objects.get(id=pokemon_id).items.add(item_id)
+    return redirect('pokemon-detail', pokemon_id=pokemon_id)
+def remove_item(request, pokemon_id, item_id):
+    Pokemon.objects.get(id=pokemon_id).items.remove(item_id)
     return redirect('pokemon-detail', pokemon_id=pokemon_id)
 
 def signup(request):
@@ -62,7 +65,7 @@ def signup(request):
 
 class PokemonCreate(LoginRequiredMixin, CreateView):
     model = Pokemon
-    fields = '__all__'
+    fields = ['name', 'type', 'description']
 
     def form_valid(self, form):
         # Assign the logged in user (self.request.user)

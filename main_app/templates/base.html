@@ -18,14 +18,6 @@
   </head>
   <body>
     <header>
-      <div class="header-logo-container">
-        <a href="/">
-          <img
-            src="{% static 'images/header-logo1.png' %}"
-            ,alt="The pokemon Collector Logo"
-          />
-        </a>
-      </div>
       <nav>
         <ul>
           {% if user.is_authenticated %}

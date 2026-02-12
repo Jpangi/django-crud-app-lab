@@ -17,53 +17,53 @@
     >
   </div>
 </section>
-{% endblock %}
+
 <section class="items">
   <div class="subsection-title">
     <h2>items</h2>
-    <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
-    <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
-    <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
   </div>
 
-  <!-- displaying a cat's toys -->
+  <!-- displaying a pokemon's item -->
   <h3>{{ pokemon.name }}'s Items</h3>
   <div class="subsection-content">
-    {% if pokemon.items.count %} 
-      {% for item in pokemon.items.all %}
-        <div class="item-container">
-          <div class="color-block" style="background-color: {{ item.color }}"></div>
-          <a href="{% url 'item-detail' item.id %}">
-            <p>A {{ item.color }} {{ item.name }}</p>
-          </a>
-        </div>
-      {% endfor %} 
-    {% else %}
-      <p class="no-items">{{pokemon.name}} doesn't have any Items!</p>
+    {% if pokemon.items.count %} {% for item in pokemon.items.all %}
+    <div class="item-container">
+      <div class="color-block" style="background-color: {{ item.color }}"></div>
+      <a href="{% url 'item-detail' item.id %}">
+        <p>A {{ item.color }} {{ item.name }}</p>
+      </a>
+      <form action="{% url 'remove-item' pokemon.id item.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Remove Item</button>
+      </form>
+    </div>
+    {% endfor %} {% else %}
+    <p class="no-items">{{pokemon.name}} doesn't have any Items!</p>
     {% endif %}
   </div>
 
+  <h3>Available Items</h3>
+  <div class="subsection-content">
+    {% if items.count %} {% for item in items.all %}
+    <div class="item-container">
+      <div class="color-block" style="background-color: {{ item.color }}"></div>
+      <a href="{% url 'item-detail' item.id %}">
+        <p>A {{ item.color }} {{ item.name }}</p>
+      </a>
+      <form
+        action="{% url 'associate-item' pokemon.id item.id %}"
+        method="post"
+      >
+        {% csrf_token %}
+        <button type="submit" class="btn submit">Give item</button>
+      </form>
+    </div>
+    {% endfor %} {% else %}
+    <p class="all-items">
+      {{pokemon.name}} already has all the available items 🥳
+    </p>
+    {% endif %}
+  </div>
 
-
-
- <h3>Available Items</h3>
-<div class="subsection-content">
-  {% if items.count %} 
-    {% for item in items.all %}
-      <div class="item-container">
-        <div class="color-block" style="background-color: {{ item.color }}"></div>
-        <a href="{% url 'item-detail' item.id %}">
-          <p>A {{ item.color }} {{ item.name }}</p>
-        </a>
-        <form action="{% url 'associate-item' pokemon.id item.id %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn submit">Give item</button>
-        </form>
-      </div>
-    {% endfor %} 
-  {% else %}
-    <p class="all-items">{{pokemon.name}} already has all the available items 🥳</p>
-  {% endif %}
-</div>
-
-
+  {% endblock %}
+</section>
