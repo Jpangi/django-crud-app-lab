@@ -29,9 +29,9 @@ body {
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   min-height: 100vh;
-  --nav-bg: rgba(104, 197, 248, 0.7);
-  --nav-bg-ff: rgba(104, 197, 248, 0.9);
-  --borders: rgb(36, 116, 248) solid 2px;
+  --nav-bg: rgba(248, 104, 104, 0.7);
+  --nav-bg-ff: rgba(248, 106, 104, 0.9);
+  --borders: rgb(248, 61, 36) solid 2px;
   --text-color: rgb(17, 20, 17);
   --link-hover-color: rgb(16, 56, 158);
   --button-bg: rgb(245, 245, 245);
@@ -266,7 +266,7 @@ nav li {
 
     nav,
     .header-logo-container {
-      background: rgba(104, 197, 248, 0.6);
+      background: rgba(248, 130, 104, 0.6);
       -webkit-backdrop-filter: blur(3px);
       backdrop-filter: blur(3px);
     }
